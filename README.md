@@ -30,9 +30,9 @@ git clone https://github.com/prosele/PathTraversal.git
 
 ### 1. Развёртывание уязвимого сервиса
 
-Убедиться, что установлены Docker и Docker Compose.  
+Убедитесь, что установлены Docker и Docker Compose.  
 
-Запустить контейнер:  
+Запустите контейнер:  
 
 ```bash  
 docker compose up -d  
@@ -62,7 +62,7 @@ nuclei -sign -t path-traversal-detection.yaml
 
 ### 3. Проверка уязвимости
 
-Запустить детектирование:
+Запустите детектирование:
 
 ```bash
 nuclei -u http://127.0.0.1:5001 \
